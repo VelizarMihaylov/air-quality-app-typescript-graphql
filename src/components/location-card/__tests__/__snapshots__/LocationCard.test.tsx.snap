@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LocationCard should render with city, location and measurement props 1`] = `
+<div
+  className="sc-bdfBwQ fSvdqj"
+  data-puppet="location-card"
+>
+  <div
+    className="card-content"
+  >
+    <p
+      className="updated-at"
+    >
+      Updated 5 hours ago
+    </p>
+    <h3>
+      Manchester Piccadilly
+    </h3>
+    <p>
+      in Manchester, United Kingdom
+    </p>
+    <p
+      className="values"
+    >
+      Value: O3: 25 µg/m³, SO2: 12 µg/m³, PM25: 6 µg/m³, NO2: 16 µg/m³
+    </p>
+  </div>
+</div>
+`;

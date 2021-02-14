@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListLocations should handle error state 1`] = `
+<h1>
+  Oops something went wrong!
+</h1>
+`;
+
+exports[`ListLocations should handle loading state 1`] = `
+<div
+  className="sc-jSgupP cliOlb"
+/>
+`;
+
+exports[`ListLocations should render locations when not in loading or error state and passed latestMeasurements 1`] = `
+<div
+  className="sc-jSgupP cliOlb"
+>
+  <div
+    className="sc-hKgILt xsnPe location-card"
+    data-puppet="location-card"
+  >
+    <div
+      className="card-content"
+    >
+      <p
+        className="updated-at"
+      >
+        Updated 5 hours ago
+      </p>
+      <h3>
+        Manchester Piccadilly
+      </h3>
+      <p>
+        in Manchester, United Kingdom
+      </p>
+      <p
+        className="values"
+      >
+        Value: PM25: 10 µg/m³, SO2: 11 µg/m³, NO2: 22 µg/m³, O3: 17 µg/m³
+      </p>
+    </div>
+  </div>
+  <div
+    className="sc-hKgILt xsnPe location-card"
+    data-puppet="location-card"
+  >
+    <div
+      className="card-content"
+    >
+      <p
+        className="updated-at"
+      >
+        Updated 5 hours ago
+      </p>
+      <h3>
+        Manchester Sharston
+      </h3>
+      <p>
+        in Manchester, United Kingdom
+      </p>
+      <p
+        className="values"
+      >
+        Value: O3: 34 µg/m³, NO2: 10 µg/m³
+      </p>
+    </div>
+  </div>
+  <div
+    className="sc-hKgILt xsnPe location-card"
+    data-puppet="location-card"
+  >
+    <div
+      className="card-content"
+    >
+      <p
+        className="updated-at"
+      >
+        Updated 5 hours ago
+      </p>
+      <h3>
+        Salford Eccles
+      </h3>
+      <p>
+        in Manchester, United Kingdom
+      </p>
+      <p
+        className="values"
+      >
+        Value: NO2: 13 µg/m³, PM25: 13 µg/m³, PM10: 16 µg/m³
+      </p>
+    </div>
+  </div>
+</div>
+`;

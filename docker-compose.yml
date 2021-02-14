@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  apollo-graphql:
+    image: mihaylv/apollo-koa-graphql:0.0.3
+    environment:
+      - NODE_ENV=development
+    ports:
+      - 4444:4444

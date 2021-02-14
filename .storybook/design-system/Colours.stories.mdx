@@ -1,0 +1,35 @@
+import { Meta, ColorPalette, ColorItem,  } from "@storybook/addon-docs/blocks";
+import { colours } from "../../src/theme/@config/colours";
+
+<Meta title="🎨 Design System / Colours" />
+
+# Colours
+
+colours are defined in the theme, to use colours you will need to access the ThemeContext
+
+```css
+color: ${({ theme }) => theme.colours.grey};
+```
+
+<ColorPalette>
+  <ColorItem
+    title="White"
+    subtitle="theme.colours.white"
+    colors={[colours.white]}
+  />
+  <ColorItem
+    title="Grey"
+    subtitle="theme.colours.grey"
+    colors={[colours.grey]}
+  />
+  <ColorItem
+    title="Black"
+    subtitle="theme.colours.black"
+    colors={[colours.black]}
+  />
+  <ColorItem
+    title="Purple"
+    subtitle="theme.colours.purple"
+    colors={[colours.purple]}
+  />
+</ColorPalette>
