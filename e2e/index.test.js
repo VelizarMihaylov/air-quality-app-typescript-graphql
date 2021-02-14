@@ -1,8 +1,8 @@
 /**
- * We need to set the jest timeout to 10000ms
+ * We need to set the jest timeout to 25000ms
  * to make sure that the tests will not timeout
  */
-jest.setTimeout(10000)
+jest.setTimeout(25000)
 
 describe('', () => {
   beforeAll(async () => {

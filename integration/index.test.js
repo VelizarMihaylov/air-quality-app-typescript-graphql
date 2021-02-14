@@ -1,10 +1,8 @@
 /**
- * We need to set the jest timeout to 10000ms
+ * We need to set the jest timeout to 25000ms
  * so the tests will not timeout in CI
  */
-if (process.env.CI) {
-  jest.setTimeout(10000)
-}
+jest.setTimeout(25000)
 
 import { configureToMatchImageSnapshot } from 'jest-image-snapshot'
 import { citiesMock, latestMeasurementsMock } from './__mocks__'
@@ -25,7 +23,7 @@ describe('', () => {
 
     await page.setRequestInterception(true)
 
-    await page.on('request', request => {
+    await page.on('request', (request) => {
       const url = request.url()
       if (url === 'http://localhost:4444/graphql' && request.postData()) {
         if (JSON.parse(request.postData()).query.includes('cities')) {
