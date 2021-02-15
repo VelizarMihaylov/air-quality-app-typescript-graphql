@@ -5,8 +5,9 @@
 jest.setTimeout(25000)
 
 describe('', () => {
+  const e2eTestUrl = process.env.E2E_TEST_URL || 'http://localhost:3999'
   beforeAll(async () => {
-    await page.goto(`${process.env.E2E_TEST_URL}`)
+    await page.goto(`${e2eTestUrl}`)
   })
   it('should populate the input box with selected city ', async () => {
     await page.waitForSelector('[data-puppet="magnifying-glass-icon"]', {

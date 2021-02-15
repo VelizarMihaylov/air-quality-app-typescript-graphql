@@ -9,14 +9,15 @@ import { citiesMock, latestMeasurementsMock } from './__mocks__'
 
 describe('', () => {
   beforeAll(async () => {
+    const integrationTestUrl =
+      process.env.INTEGRATION_TEST_URL || 'http://localhost:3999'
+    const graphqlServiceUrl =
+      process.env.GAPHQL_SERVICE_URL || 'http://localhost:3999'
     const toMatchImageSnapshot = configureToMatchImageSnapshot({
       /**
-       * In CI the generated screenshots will be slightly different due
-       * to the test running in a different env. Setting the failureThreshold
-       * to 0.5% will allow tests to pass while still getting fairly accurate comparison
-       * we still keep it down to zero when we run the test locally
+       * Setting the failureThreshold to 0.5% to avoid false positives.
        */
-      failureThreshold: process.env.CI ? 0.5 : 0,
+      failureThreshold: 0.5,
       failureThresholdType: 'percent'
     })
     expect.extend({ toMatchImageSnapshot })
@@ -25,7 +26,7 @@ describe('', () => {
 
     await page.on('request', (request) => {
       const url = request.url()
-      if (url === 'http://localhost:4444/graphql' && request.postData()) {
+      if (url === graphqlServiceUrl && request.postData()) {
         if (JSON.parse(request.postData()).query.includes('cities')) {
           request.respond({
             status: 200,
@@ -50,7 +51,7 @@ describe('', () => {
       }
     })
 
-    await page.goto(`${process.env.INTEGRATION_TEST_URL}`)
+    await page.goto(`${integrationTestUrl}`)
   })
   it('should populate the input box with selected city ', async () => {
     await page.waitForSelector('[data-puppet="magnifying-glass-icon"]', {

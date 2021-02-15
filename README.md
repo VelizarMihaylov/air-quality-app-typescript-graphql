@@ -1,5 +1,7 @@
 A simple app that uses Open AQ Air Quality API to allow you to compare the quality of the air across cities in the UK.
 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 ## Prerequisites
 
 Before you run the app you will need to make sure that you have the following installed on your machine:
@@ -16,7 +18,7 @@ The app uses a simple GraphQL server as a backend service that will call the AQ 
 ```bash
 docker compose up
 ```
-Or simply use the `make` command
+Or simply use the `make up` command set in the `Makefile` in the root folder
 
 ```bash
 make up
@@ -50,6 +52,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
+### `yarn lint:typescript`
+
+Start the EsLint runner and checks the typescript code
+
+### `yarn lint:styles`
+
+Start the EsLint runner and checks the css styles. 
 ### `yarn test:unit`
 
 Launches the test runner in the interactive watch mode.<br />
@@ -98,7 +107,156 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 Starts storybook on port 6066
 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Styling The Components
+
+Styling the React components is done with the [styled components](https://styled-components.com/). Try to avoid global class names and keep the styles scoped to the react components.
+
+**NOTE**
+A global styles reset is provided with the global styles component. You can find the component definition in `./src/components/global-styles`. This component will be set at the top of the React App and will set some default styles. The components uses [normalize](https://necolas.github.io/normalize.css/) as a base but you can tweak it further if needed.
+
+---
+
+### Theming
+
+The project use a custom theming solution to allow managing all the main design elements such as colours, type, break points etc. in single place.
+
+The source code for the theme generator can be find in `./src/theme`. This folder has a default export `generateTheme` that can be used with the `styled-components` ThemeProvider to set a theme for all wrapped components:
+
+```javascript
+import React from 'react'
+import { ThemeProvider } from 'styled-components'
+import { generateTheme } from 'lmel-components/core/theme'
+import App from './App'
+
+React.render(
+    <ThemeProvider theme={generateTheme()}>
+      <App>
+    </ThemeProvider>,
+    '#root'
+)
+```
+
+You can pass options to the `generateTheme` function like that:
+
+```javascript
+//...
+    <ThemeProvider theme={generateTheme({baseSize: 1 })}>
+//...
+```
+
+The following options are available:
+
+| Option    | Type              | Default Value     |
+| --------- | ----------------- | ----------------- |
+| baseUnits | 'px', 'rem'       | 'rem'             |
+| baseSize  | Number            | 16                |
+| themeType | 'light', 'dark'   | 'light'           |
+
+
+
+**NOTE**
+In the current version of the app dark theme is still to be implemented so changing the `themeType` prop will not have any effect.
+
+---
+#### Using the theme
+
+You can use the theme inside styled-components like so:
+
+```javascript
+import styled from 'styled-components';
+
+export const CardComponent = styled.div`
+	background: ${({ theme }) => theme.colors.white};
+`;
+```
+
+Please make sure you always use the theme values if those are available and avoid hard coding values in your CSS.
+
+#### The spacing helper method
+
+The theme provides a conversion helper method that will automatically convert pixel values to rems (or whatever the baseUnit of the theme being used is). 
+
+The conversion is done as follow:
+
+* if baseUint is set to 'px' the value passed will not be changed despite what the base size is set to and the spacing method will return the same number
+
+```javascript
+import styled from 'styled-components';
+
+// const theme = generateTheme({baseUnit: 'px', baseSize: 16 })
+
+export const NavigationContainer = styled.div`
+	display: flex;
+	height: ${({ theme }) => theme.spacing(80)}; // returns 80px
+	background: ${({ theme }) => theme.colors.white};
+`;
+```
+
+* if baseUnit is set to 'rem' the value passed to the spacing method will be divided by the baseSize. 
+
+```javascript
+import styled from 'styled-components';
+
+// Assuming the top level theme in the ThemeProvider is set as
+// const theme = generateTheme({baseUnit: 'rem', baseSize: 16 })
+
+export const NavigationContainer = styled.div`
+	display: flex;
+	height: ${({ theme }) => theme.spacing(80)}; // returns 5rem
+	background: ${({ theme }) => theme.colors.white};
+`;
+```
+
+```javascript
+import styled from 'styled-components';
+
+// Assuming the top level theme in the ThemeProvider is set as
+// const theme = generateTheme({baseUnit: 'rem', baseSize: 1 })
+
+export const NavigationContainer = styled.div`
+	display: flex;
+	height: ${({ theme }) => theme.spacing(5)}; // returns 5rem
+	background: ${({ theme }) => theme.colors.white};
+`;
+```
+
+You can also pass an object for shorthand values:
+
+```javascript
+import styled from 'styled-components';
+
+// Assuming the top level theme in the ThemeProvider is set as
+// const theme = generateTheme({baseUnit: 'rem', baseSize: 16 })
+
+export const NavigationContainer = styled.div`
+	display: flex;
+	height: ${({ theme }) => theme.px(80)}; // returns 5rem
+	background: ${({ theme }) => theme.colors.primary[100]};
+	margin: ${({ theme }) =>
+		theme.px({
+			top: 80,
+			left: 0,
+			bottom: 24,
+			right: 0,
+		})}; // returns 1.5rem 0 1.5rem 0
+`;
+```
+
+#### The space helper method
+
+Spacing between elements should be in multiples of 26px. A helper method has been provided to the theme object to aid with this:
+
+```javascript
+import styled from 'styled-components';
+
+export const Element = styled.div`
+	display: block;
+	margin-bottom: ${({ theme }) => theme.space()} // returns 1.625rem (26px)
+	margin-right: ${({ theme }) => theme.space(2)} // returns 3.25rem (52px)
+`;
+```
+
+
 
 ## Learn More
 
