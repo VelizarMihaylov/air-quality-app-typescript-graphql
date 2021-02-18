@@ -11,9 +11,7 @@ import {
 import styled from 'styled-components'
 
 const PageComponent = styled.div`
-  height: calc(100vh - ${({ theme }) => theme.spacing(1.5)});
   padding-top: ${({ theme }) => theme.spacing(1.5)};
-  background: ${({ theme }) => theme.colours.bg[100]};
 
   & h1 {
     color: ${({ theme }) => theme.colours.white};
