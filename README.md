@@ -26,7 +26,7 @@ make up
 
 Both of those commands will start a docker image that will run the GraphQL server on port `4444` If this port is not available on your machine feel free to modify the ports property in the  docker-compose.yml file in the root folder.
 
-Once you the docker image is up and running try hitting `http://localhost:4444/graphql` you should see the GraphQL playground.
+Once you get the docker image up and running try hitting `http://localhost:4444/graphql` you should see the GraphQL playground.
 
 After you get the GraphQL server running install the dependencies:
 
@@ -66,9 +66,9 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### `yarn test:integration`
 
-Starts the integration test that will user puppeteer to run the app in headless mode against a mocked endpoint and will use [jest image snapshot](https://github.com/americanexpress/jest-image-snapshot) to make screenshots and flags any style differences
+Starts the integration test that will use puppeteer to run the app in headless mode against a mocked endpoint and will use [jest image snapshot](https://github.com/americanexpress/jest-image-snapshot) to make screenshots and flags any style differences
 
-### `yarn test:integration`
+### `yarn test:e2e`
 
 Starts the end to end tests. This command will use puppeteer to run the app against the actual backend service and test that the page is loading fine.
 
@@ -104,7 +104,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ### `yarn storybook`
 
-Starts storybook on port 6066
+Starts Storybook on port 6066
 
 
 ## Styling The Components
@@ -132,7 +132,6 @@ React.render(
     <ThemeProvider theme={generateTheme()}>
       <App>
     </ThemeProvider>,
-    '#root'
 )
 ```
 
